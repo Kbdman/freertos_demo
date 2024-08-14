@@ -1,1 +1,3 @@
 build/*
+*.o
+setup_env.sh
