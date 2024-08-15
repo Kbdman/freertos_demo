@@ -1,3 +1,4 @@
 build/*
 *.o
 setup_env.sh
+.vscode/c_cpp_properties.json
