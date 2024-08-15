@@ -14,7 +14,7 @@ The reason seems to be that I havn't setup the heap.
 
 ## How to get here
 1. Create a dummy program which can be built and execute on your target
-2. Find **portmacro.h** and **port.c** which are suitable for your device in portable folder and move them to your project.
+2. Find **portmacro.h** and **port.c** which are suitable for your device in portable folder of FreeRTOSv202212.01 and move them to your project.
 3. Copy a **FreeRTOSConfig.h** to your project and do some customization.
 4. Copy **list.c** **tasks.c** **queue.c** to you project
 5. Seems some functions in **tasks.c** are using memset and memcpy,so implement them
