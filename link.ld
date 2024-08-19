@@ -14,18 +14,18 @@ SECTIONS
         *(.text)
         }
 
-    . = 0x20000000;
-    .data : ALIGN(4) {
+
+    .data : {
         DataVM = .;
         *(.data)
-        }
+        } > RAM0 AT > ROM0
     DataStart = LOADADDR(.data);
     DataSize = SIZEOF(.data) ;
     .bss : ALIGN(4)
     {
       BSSVM = .;
       *(.bss)
-    }
+    } > RAM0 AT > RAM0
     BSSStart = LOADADDR(.bss);
     BSSSize = SIZEOF(.bss) ;
 
