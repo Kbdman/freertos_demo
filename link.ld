@@ -6,28 +6,29 @@ MEMORY
 SECTIONS
 {
     .isr_vector : {
-            . = ALIGN(4);
       . = ALIGN(4);
       KEEP(*(.isr))
       } > ROM0
+
     .text : {
         *(.text)
-        }
-
+      } > ROM0
 
     .data : {
         DataVM = .;
         *(.data)
-        } > RAM0 AT > ROM0
+        DataVMEnd = .;
+      } > RAM0 AT > ROM0
+
     DataStart = LOADADDR(.data);
-    DataSize = SIZEOF(.data) ;
+
+
     .bss : ALIGN(4)
     {
       BSSVM = .;
       *(.bss)
+      BSSVMEnd = .;
     } > RAM0 AT > RAM0
-    BSSStart = LOADADDR(.bss);
-    BSSSize = SIZEOF(.bss) ;
 
     .stack (NOLOAD):
     {
