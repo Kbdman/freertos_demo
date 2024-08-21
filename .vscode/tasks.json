@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "arm-debugger.flash",
+			"serialNumber": "${command:device-manager.getSerialNumber}",
+			"program": "${workspaceFolder}/build/demo.elf",
+			"cmsisPack": "${command:device-manager.getDevicePack}",
+			"deviceName": "${command:device-manager.getDeviceName}",
+			"problemMatcher": [],
+			"label": "arm-debugger.flash: Flash Device"
+		}
+	]
+}

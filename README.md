@@ -8,6 +8,7 @@ The reason seems to be that I havn't setup the heap.
 ## Build
 1. Download and unzip source code of FreeRTOSv202212.01
 2. Setup an environment variable **FREERTOS_INCLUDES** which points to the include folder of FreeRTOSv202212.01
+2. Setup an environment variable **CMSIS_INCLUDES** which points to the include folder of CMSIS
 3. Download and unzip toolchain arm-none-eabi from https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
 4. Add ${toolchain}/bin to enviroment variable **PATH**
 5. build with cmake
