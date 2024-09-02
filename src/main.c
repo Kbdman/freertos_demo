@@ -4,6 +4,7 @@
 #include "stm32f4xx.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "log.h"
 #define ISR(x) ((void *)(&x))
 extern char DataVM,
     DataVMEnd, DataStart;
@@ -25,9 +26,16 @@ void DummyTask(void *pvParam)
     {
     }
 }
+char *array[3] = {"aaaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbb", "ccccccccccccccccccccccc"};
 void main()
 {
+
     initialize();
+    init_log();
+    for (int i = 0; 1; i++)
+    {
+        log_str(array[i % 3]);
+    }
 
     xTaskCreate(&DummyTask, "DummyTask", 100, NULL, 1, NULL);
     xTaskCreate(&DummyTask, "DummyTask2", 100, NULL, 1, NULL);
@@ -37,12 +45,15 @@ void main()
     }
 }
 void DefaultHandler(void) {};
+void DefaultHandler1(void) {};
+void DefaultHandler2(void) {};
+void DefaultHandler3(void) {};
 void *reset_vector[] __attribute__((section(".isr"))) = {
-    (void *)0x2001FFFF,
+    (void *)(0x20010000),
     (void *)(&main),
-    ISR(DefaultHandler),
-    ISR(DefaultHandler),
-    ISR(DefaultHandler),
+    ISR(DefaultHandler1),
+    ISR(DefaultHandler2),
+    ISR(DefaultHandler3),
     ISR(DefaultHandler),
     ISR(DefaultHandler),
     ISR(DefaultHandler),
@@ -50,4 +61,79 @@ void *reset_vector[] __attribute__((section(".isr"))) = {
     ISR(DefaultHandler),
     ISR(DefaultHandler),
     ISR(xPortPendSVHandler),
-    ISR(xPortSysTickHandler)};
+    ISR(xPortSysTickHandler), // xPortSysTickHandler
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DefaultHandler),
+    ISR(DMA2_Stream7_IRQHandler),
+    ISR(DMA2_Stream7_IRQHandler),
+    ISR(DMA2_Stream7_IRQHandler),
+    ISR(DMA2_Stream7_IRQHandler)};
