@@ -14,6 +14,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/CMSIS/STM32F407)
 include_directories($ENV{FREERTOS_INCLUDES})
 include_directories($ENV{CMSIS_INCLUDES})
+include_directories($ENV{TOOLCHAIN_INCLUDES})
 
 set(CMAKE_EXE_LINKER_FLAGS "-mcpu=cortex-m4 -T ${CMAKE_SOURCE_DIR}/link.ld")
 add_executable(demo.elf src/main.c src/port.c src/tasks.c src/list.c src/queue.c src/mem.c src/heap_4.c src/log.c src/peripheral.c src/common.c)

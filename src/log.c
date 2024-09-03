@@ -1,6 +1,7 @@
+
 #include "log.h"
 #include "peripheral.h"
-#include "stddef.h"
+
 char buf[512] = {};
 uint32_t buflen = 0;
 void init_log()
@@ -29,13 +30,14 @@ void logBuf(const char *msg, uint32_t len)
 {
     if (len == 0 || msg == NULL)
         return;
-    buf[0] = '\r';
-    buf[1] = '\n';
+
     if (len > sizeof(buf) - 2)
         len = sizeof(buf) - 2;
 
     buflen = len + 2;
-    memcpy(buf + 2, msg, len);   // copy data to send buffer
+    memcpy(buf, msg, len); // copy data to send buffer
+    buf[len] = '\r';
+    buf[len + 1] = '\n';
     while (DMA2_Stream7->CR & 1) // wait for unfinished transfer
         ;
     DMA2_Stream7->M0AR = (uint32_t)buf;            // setup src address
@@ -47,10 +49,13 @@ void log_str(const char *str)
 {
     logBuf(str, strlen(str));
 }
+
 void DMA2_Stream7_IRQHandler()
 {
+    static int count = 0;
     if (DMA2->HISR & (1 << 27))
     {
+        count++;
         DMA2->HIFCR |= 1 << 27;
     }
 }
