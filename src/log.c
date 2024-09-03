@@ -1,5 +1,5 @@
 #include "log.h"
-#include "gpio.h"
+#include "peripheral.h"
 #include "stddef.h"
 char buf[512] = {};
 uint32_t buflen = 0;

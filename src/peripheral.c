@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "peripheral.h"
 void setGPIOMode(GPIO_TypeDef *gpio, uint8_t port, uint8_t mode)
 {
     gpio->MODER = clearBit(gpio->MODER, port * 2, 2) | (mode << (port * 2));
