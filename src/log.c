@@ -4,6 +4,7 @@
 
 char buf[512] = {};
 uint32_t buflen = 0;
+int count = 0;
 void init_log()
 {
     RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
@@ -52,10 +53,14 @@ void log_str(const char *str)
 
 void DMA2_Stream7_IRQHandler()
 {
-    static int count = 0;
+
     if (DMA2->HISR & (1 << 27))
     {
-        count++;
         DMA2->HIFCR |= 1 << 27;
+    }
+    if (DMA2->HISR & (1 << 25))
+    {
+        count++;
+        DMA2->HIFCR |= 1 << 25;
     }
 }
