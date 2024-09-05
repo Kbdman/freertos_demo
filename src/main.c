@@ -31,6 +31,7 @@ void main()
 
     initialize();
     init_log();
+
     xTaskCreate(&DummyTask, "DummyTask", 100, "This is Task1", 1, NULL);
     xTaskCreate(&DummyTask, "DummyTask2", 100, "This is Task2", 1, NULL);
     vTaskStartScheduler();

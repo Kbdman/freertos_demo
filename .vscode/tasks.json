@@ -9,6 +9,12 @@
 			"deviceName": "${command:device-manager.getDeviceName}",
 			"problemMatcher": [],
 			"label": "arm-debugger.flash: Flash Device"
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "cd ${workspaceFolder}/build/ && make",
+			"problemMatcher": []
 		}
 	]
 }
